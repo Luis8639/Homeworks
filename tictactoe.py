@@ -1,7 +1,11 @@
 from graphics import *
+winning_condittions = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 x = 1
 y = 1
+x_list = []
+y_list = []
 flag = True
+won = False
 win = GraphWin("MY window", 1000, 1000)
 win.setBackground(color_rgb(0, 0, 0))
 pt1 = Point(250, 250)
@@ -66,10 +70,11 @@ cir8_2.setFill(color_rgb(0,100,50))
 cir9_2 = Circle(pt9, 50)
 cir9_2.setFill(color_rgb(0,100,50))
 
-while(x != 0):
+while(x != 0 and not won):
     if(flag):
         flag = False
         x = int(input("enter num P1: "))
+        x_list.append(x)
         if (x == 1):
             cir1.draw(win)
         elif(x == 2):
@@ -88,8 +93,14 @@ while(x != 0):
             cir8.draw(win)
         elif(x == 9):
             cir9.draw(win)
+        if(x_list in winning_condittions):
+            won = True
+            print("Player 1 has won\n")
+            win.getMouse()
+            win.close()
     elif(not flag):
         y = int(input("enter num P2: "))
+        y_list.append(y)
         flag = True
         if (y == 1):
             cir1_2.draw(win)
@@ -109,6 +120,11 @@ while(x != 0):
             cir8_2.draw(win)
         elif (y == 9):
             cir9_2.draw(win)
+        if(y_list in winning_condittions):
+            won = True
+            print("player 2 has won")
+            win.getMouse()
+            win.close()
 
 win.getMouse()
 win.close()
